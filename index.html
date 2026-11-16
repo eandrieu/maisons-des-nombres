@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les maisons des nombres</title>
+  <meta name="description" content="Entraînement aux maisons des nombres (3, 4, 5, 6, 7 et 10) pour les enfants de CP et CE1.">
+  <meta name="theme-color" content="#171A4A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Maisons">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Définitions SVG partagées (dégradés, halo lumineux) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="ffGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FFE27A" stop-opacity=".9"/>
+        <stop offset="55%" stop-color="#FFD34E" stop-opacity=".25"/>
+        <stop offset="100%" stop-color="#FFD34E" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="sky" aria-hidden="true"><div class="moon"></div><div class="stars" id="stars"></div></div>
+
+  <!-- Accueil : la rue -->
+  <section id="home" class="screen active">
+    <header class="home-top">
+      <div class="guide">
+        <div class="firefly" data-firefly></div>
+        <div class="greet">
+          <h1 id="greeting">Bonsoir !</h1>
+          <p id="guideLine"></p>
+        </div>
+      </div>
+      <div class="home-meta">
+        <span class="pill" id="starTotal" aria-label="Étoiles gagnées">⭐ 0</span>
+        <button class="btn-ghost" id="btnParents" type="button">Parents</button>
+      </div>
+    </header>
+    <div class="street-wrap">
+      <svg id="street" viewBox="0 40 1200 730" preserveAspectRatio="xMidYMax meet" role="list" aria-label="La rue des maisons"></svg>
+    </div>
+    <nav class="home-actions">
+      <button class="btn-big" id="btnRue" type="button">Toute la rue</button>
+      <button class="btn-big btn-defi" id="btnDefi" type="button"><span>⚡ Défi éclair</span><small id="defiRecord"></small></button>
+    </nav>
+  </section>
+
+  <!-- Partie -->
+  <section id="game" class="screen">
+    <header class="hud">
+      <button class="btn-round" id="btnPause" type="button" aria-label="Pause">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="2" fill="currentColor"/><rect x="14" y="4" width="5" height="16" rx="2" fill="currentColor"/></svg>
+      </button>
+      <div class="lamps" id="lamps" aria-hidden="true"></div>
+      <div class="hud-score">
+        <span class="streak" id="streak"></span>
+        <span class="score" id="score">0</span>
+      </div>
+    </header>
+    <div class="stage" id="stage">
+      <div class="question">
+        <div class="house-wrap">
+          <svg id="bigHouse" viewBox="0 0 400 330" aria-hidden="true"></svg>
+          <div class="firefly small" data-firefly id="gameFly"></div>
+          <div class="float-layer" id="floatLayer"></div>
+        </div>
+        <div class="equation" id="equation" aria-live="polite"></div>
+        <div class="speed" aria-hidden="true"><div class="speed-fill" id="speedFill"></div></div>
+        <p class="feedback" id="feedback" aria-live="polite"></p>
+      </div>
+      <div class="keypad" id="keypad"></div>
+    </div>
+  </section>
+
+  <!-- Espace parents -->
+  <section id="parents" class="screen"></section>
+
+  <!-- Fenêtres superposées -->
+  <div class="overlay" id="overlay"><div class="panel" id="panel"></div></div>
+  <div class="countdown" id="countdown" aria-live="assertive"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
